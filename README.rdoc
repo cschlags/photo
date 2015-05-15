@@ -2,4 +2,21 @@ Added 'paperclip' and 'aws-sdk' to gemfile to allow paperclip to work
 
 Add attachment_validation to user
 
-Add index and form for user to upload photo
+Add index and new for user to upload photo
+
+Form will not work since @user is currently nil, implement this in your current app
+
+For API request a sample request (if you have current_user up) is to post:
+{image: \"INSERT BASE64 ENCODED STRING OF FILE HERE\"}
+
+to process that base code use this method
+
+def process_avatar
+  if params[:account] && params[:account][:avatar]
+    data = StringIO.new(Base64.decode64(params[:account][:avatar][:data]))
+    data.class.class_eval { attr_accessor :original_filename, :content_type }
+    data.original_filename = params[:account][:avatar][:filename]
+    data.content_type = params[:account][:avatar][:content_type]
+    params[:account][:avatar] = data
+  end
+end
