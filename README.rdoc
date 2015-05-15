@@ -20,3 +20,5 @@ def process_avatar
     params[:user][:image] = data
   end
 end
+
+^^This method of transferring images is for very small in size and small in amount of images, if you think that there may come a time when you will have hundreds or thousands of images and your hosted app can't handle that then read the blog post I send you from my blog. If you use AWS S3 then it will work wonderfully
